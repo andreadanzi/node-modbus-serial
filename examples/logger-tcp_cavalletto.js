@@ -4,7 +4,7 @@ var ModbusRTU = require("../index");
 var client = new ModbusRTU();
 
 // open connection to a tcp line
-client.connectTCP("192.168.2.19");
+client.connectTCP("127.0.0.1");
 
 /* read 10 registers ar 10 Hz 
  * 1 - The Slave Address.
@@ -13,6 +13,6 @@ client.connectTCP("192.168.2.19");
  */
 setInterval(function() {
     client.readHoldingRegisters(40001, 20, function(err, data) {
-        console.log(data.data);
+        console.log("P(mA)=" + data.data[4]+"  P(bar)=" +data.data[5]+"  Q(mA)=" +data.data[6]+" Q(lit/min)=" +data.data[7]);
     });
 }, 100);
